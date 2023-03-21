@@ -23,6 +23,7 @@
 </body>
 </html>
 <?php
+include('randomgene.php');
 if (isset($_GET['lunghezza_password_casuale'])) {
 	$lunghezza = $_GET['lunghezza_password_casuale'];
     ?>
@@ -37,17 +38,18 @@ if (isset($_GET['lunghezza_password_casuale'])) {
     $caratteri_possibili_generabili = $lettere_minuscole . $lettere_maiuscole . $caratteri_numerici . $caratteri_speciali;
     ?>
 
-	<!-- funzione genera password attraverso  
-     diversi metodi possibili rand : non rende valori criptografici sicuri /random_bytes :  rende valori crittografici adatti per l'uso crittografico / random_int : genera interi criptografici sicuri
-     prendo un carattere casuale  da 0 a la lunghezza massima lunghezza dei caratteri scritti nelle stringhe in precedenza
-     che viene attraversato dal ciclo in base alla lunghezza della value imput richiesto con il form all'utente    -->
+	
     <?php
-	$password_generata = '';
-	for ($i = 0; $i < $lunghezza; $i++) {
-		$password_generata .= $caratteri_possibili_generabili[random_int(0, strlen($caratteri_possibili_generabili) - 1)];
-	}
+    // <!-- funzione genera password attraverso  
+    //  diversi metodi possibili rand : non rende valori criptografici sicuri /random_bytes :  rende valori crittografici adatti per l'uso crittografico / random_int : genera interi criptografici sicuri
+    //  prendo un carattere casuale  da 0 a la lunghezza massima lunghezza dei caratteri scritti nelle stringhe in precedenza
+    //  che viene attraversato dal ciclo in base alla lunghezza della value imput richiesto con il form all'utente    -->
+    $password_generata='';
+    $password_random = generator($password_generata, $lunghezza, $caratteri_possibili_generabili);
+    
+    
 
-	echo "Password: $password_generata";
+	echo "Password: $password_random";
 } else {
 	echo "Nessun parametro inserito";
 }
